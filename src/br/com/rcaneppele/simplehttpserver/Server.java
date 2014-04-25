@@ -1,21 +1,26 @@
 package br.com.rcaneppele.simplehttpserver;
 
-import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+import br.com.rcaneppele.simplehttpserver.request.HttpRequestHandler;
+
 public class Server {
 	
-	private static final int PORT = 5050;
+	private final int SERVER_PORT = 5050;
 
-	public static void main(String[] args) throws IOException {
-		try (ServerSocket server = new ServerSocket(PORT)) {
+	public static void main(String[] args) throws Exception {
+		new Server().start();
+	}
+	
+	private void start() throws Exception {
+		try(ServerSocket server = new ServerSocket(SERVER_PORT)) {
 			while (true) {
 				Socket client = server.accept();
+				System.out.println("new http request received from: " +client.getInetAddress().getHostAddress());
 				
-				System.out.println("new http request received: " +client);
-				
-				client.close();
+				HttpRequestHandler handler = new HttpRequestHandler(client);
+				new Thread(handler).start();
 			}
 		}
 	}

@@ -12,6 +12,11 @@ public final class HttpRequest {
 		this.httpVersion = httpVersion;
 	}
 	
+	@Override
+	public String toString() {
+		return getStartLine();
+	}
+
 	public String getStartLine() {
 		return method +" " +uri +" " +httpVersion;
 	}
