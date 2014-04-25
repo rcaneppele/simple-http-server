@@ -53,7 +53,7 @@ public class HttpRequestFactoryTest {
 		
 		HttpRequest request = factory.create(is);
 		
-		Assert.assertEquals("1.1", request.getHttpVersion());
+		Assert.assertEquals("HTTP/1.1", request.getHttpVersion());
 	}
 	
 	@Test(expected = IllegalArgumentException.class)

@@ -42,7 +42,7 @@ public class HttpRequestFactory {
 	}
 	
 	private String extractHttpVersionFrom(String startLine) {
-		return startLine.split(" ")[2].replace("HTTP/", "");
+		return startLine.split(" ")[2];
 	}
 	
 }
