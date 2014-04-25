@@ -11,6 +11,10 @@ public final class HttpRequest {
 		this.uri = uri;
 		this.httpVersion = httpVersion;
 	}
+	
+	public String getStartLine() {
+		return method +" " +uri +" " +httpVersion;
+	}
 
 	public HttpMethod getMethod() {
 		return method;

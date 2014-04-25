@@ -7,7 +7,7 @@ public class HttpRequestFactory {
 
 	public HttpRequest create(InputStream is) {
 		Scanner scanner = new Scanner(is);
-		validateRequest(scanner);
+		validatePresenceOfStartLine(scanner);
 		
 		String startLine = scanner.nextLine();
 		validateStartLine(startLine);
@@ -20,9 +20,9 @@ public class HttpRequestFactory {
 		return new HttpRequest(method, uri, version);
 	}
 	
-	private void validateRequest(Scanner scanner) {
+	private void validatePresenceOfStartLine(Scanner scanner) {
 		if (!scanner.hasNextLine()) {
-			throw new IllegalArgumentException("Http Request must have a Start Line!");
+			throw new IllegalArgumentException("The Http Request received has no Start Line!");
 		}
 	}
 	
