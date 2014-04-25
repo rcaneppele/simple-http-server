@@ -55,6 +55,46 @@ public class HttpRequestFactoryTest {
 		
 		Assert.assertEquals("1.1", request.getHttpVersion());
 	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void it_should_not_create_an_http_request_without_a_start_line() {
+		String startLine = "";
+		InputStream is = createInputStreamFor(startLine);
+		
+		factory.create(is);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void it_should_not_create_an_http_request_with_an_invalid_http_method() {
+		String startLine = "FAIL /test HTTP/1.1";
+		InputStream is = createInputStreamFor(startLine);
+		
+		factory.create(is);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void it_should_not_create_an_http_request_without_http_method() {
+		String startLine = "/test HTTP/1.1";
+		InputStream is = createInputStreamFor(startLine);
+		
+		factory.create(is);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void it_should_not_create_an_http_request_without_uri() {
+		String startLine = "GET HTTP/1.1";
+		InputStream is = createInputStreamFor(startLine);
+		
+		factory.create(is);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void it_should_not_create_an_http_request_without_http_version() {
+		String startLine = "GET /test";
+		InputStream is = createInputStreamFor(startLine);
+		
+		factory.create(is);
+	}
 
 	private ByteArrayInputStream createInputStreamFor(String content) {
 		return new ByteArrayInputStream(content.getBytes());
