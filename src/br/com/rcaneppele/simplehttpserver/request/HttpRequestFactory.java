@@ -16,7 +16,6 @@ public class HttpRequestFactory {
 		String uri = extractUriFrom(startLine);
 		String version = extractHttpVersionFrom(startLine);
 		
-		scanner.close();
 		return new HttpRequest(method, uri, version);
 	}
 	
