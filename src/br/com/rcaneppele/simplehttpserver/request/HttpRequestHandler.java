@@ -13,7 +13,6 @@ public class HttpRequestHandler implements Runnable {
 	public void run() {
 		try {
 			HttpRequest request = new HttpRequestFactory().create(client.getInputStream());
-			
 			System.out.println("Handling the request: " +request);
 			
 			client.close();
